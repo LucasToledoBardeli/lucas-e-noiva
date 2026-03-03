@@ -23,7 +23,9 @@ body{
     text-align:center;
     color:white;
     font-family:'Playfair Display', serif;
-    background: url('https://raw.githubusercontent.com/LucasToledoBardeli/lucas-e-noiva/refs/heads/main/WhatsApp%20Image%202026-03-02%20at%2023.59.35.jpeg') no-repeat center center/cover;
+    background:
+      linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+      url('https://raw.githubusercontent.com/LucasToledoBardeli/lucas-e-noiva/refs/heads/main/WhatsApp%20Image%202026-03-02%20at%2023.59.35.jpeg') no-repeat center center/cover;
     padding:20px;
 }
 
@@ -58,6 +60,12 @@ h1{
 .number{
     font-size:48px;
     font-weight:600;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.number.animate{
+    transform: translateY(-5px);
+    opacity:0.7;
 }
 
 .label{
@@ -135,6 +143,17 @@ h1{
 <script>
 
 const countdownDate = new Date("December 18, 2026 21:00:00").getTime();
+const music = document.getElementById("music");
+const btn = document.querySelector(".music-btn");
+
+function animateNumber(id, value){
+    const el = document.getElementById(id);
+    el.classList.add("animate");
+    setTimeout(()=>{
+        el.innerHTML = value;
+        el.classList.remove("animate");
+    },150);
+}
 
 const x = setInterval(function() {
 
@@ -146,10 +165,10 @@ const x = setInterval(function() {
   const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  document.getElementById("days").innerHTML = days;
-  document.getElementById("hours").innerHTML = hours;
-  document.getElementById("minutes").innerHTML = minutes;
-  document.getElementById("seconds").innerHTML = seconds;
+  animateNumber("days", days);
+  animateNumber("hours", hours);
+  animateNumber("minutes", minutes);
+  animateNumber("seconds", seconds);
 
   if (distance < 0) {
     clearInterval(x);
@@ -159,10 +178,7 @@ const x = setInterval(function() {
 
 }, 1000);
 
-const music = document.getElementById("music");
-const btn = document.querySelector(".music-btn");
-
-// Força ativação no primeiro toque da tela
+// Ativação automática no primeiro toque (mobile)
 document.body.addEventListener("click", function(){
     if(music.paused){
         music.play();
@@ -179,3 +195,8 @@ function toggleMusic(){
       btn.innerHTML = "🎵 Tocar música";
   }
 }
+
+</script>
+
+</body>
+</html>
