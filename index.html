@@ -17,17 +17,16 @@
 
 body{
     min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    margin:0;
+    padding:20px;
     text-align:center;
     color:white;
     font-family:'Playfair Display', serif;
     background:
       linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
-      url('SEU-LINK') no-repeat center center/cover;
-    padding:20px;
-    overflow-y:auto;
+      url('SEU-LINK-RAW-AQUI') no-repeat center center;
+    background-size:cover;
+    background-attachment:fixed;
 }
 
 .overlay{
@@ -36,9 +35,9 @@ body{
     border-radius:25px;
     width:100%;
     max-width:420px;
+    margin:40px auto;
     animation: fadeIn 2s ease-in-out;
 }
-
 h1{
     font-family:'Great Vibes', cursive;
     font-size:42px;
