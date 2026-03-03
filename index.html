@@ -143,6 +143,11 @@ h1{
 🎵 Tocar música
 </button>
 
+<div id="surpresa" 
+     style="display:none; margin-top:20px; font-family:'Great Vibes', cursive; font-size:28px; opacity:0; transition: opacity 1.5s ease;">
+    Você foi, é e sempre será a melhor escolha da minha vida ❤️
+</div>
+
 </div>
 
 <script>
@@ -150,6 +155,7 @@ h1{
 const countdownDate = new Date("December 18, 2026 21:00:00").getTime();
 const music = document.getElementById("music");
 const btn = document.querySelector(".music-btn");
+const cincoHoras = 5 * 60 * 60 * 1000;
 
 function animateNumber(id, value){
     const el = document.getElementById(id);
@@ -174,6 +180,14 @@ const x = setInterval(function() {
 
   const now = new Date().getTime();
   const distance = countdownDate - now;
+
+if(distance <= cincoHoras && distance > 0){
+    const surpresa = document.getElementById("surpresa");
+    surpresa.style.display = "block";
+    setTimeout(()=>{
+        surpresa.style.opacity = "1";
+    },100);
+}
 
   const days = Math.floor(distance / (1000 * 60 * 60 * 24));
   const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
