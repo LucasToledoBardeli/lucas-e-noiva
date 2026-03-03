@@ -159,10 +159,18 @@ const x = setInterval(function() {
 
 }, 1000);
 
-function toggleMusic(){
-  var music = document.getElementById("music");
-  var btn = document.querySelector(".music-btn");
+const music = document.getElementById("music");
+const btn = document.querySelector(".music-btn");
 
+// Força ativação no primeiro toque da tela
+document.body.addEventListener("click", function(){
+    if(music.paused){
+        music.play();
+        btn.innerHTML = "⏸ Pausar música";
+    }
+}, { once: true });
+
+function toggleMusic(){
   if(music.paused){
       music.play();
       btn.innerHTML = "⏸ Pausar música";
@@ -173,6 +181,5 @@ function toggleMusic(){
 }
 
 </script>
-
 </body>
 </html>
