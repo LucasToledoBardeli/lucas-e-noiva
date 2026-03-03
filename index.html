@@ -5,45 +5,135 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>A melhor escolha das nossas vidas</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
 <style>
-body{
+
+*{
     margin:0;
     padding:0;
+    box-sizing:border-box;
+}
+
+body{
     height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
     text-align:center;
     color:white;
-    font-family: 'Georgia', serif;
+    font-family:'Playfair Display', serif;
     background: url('https://raw.githubusercontent.com/LucasToledoBardeli/lucas-e-noiva/refs/heads/main/WhatsApp%20Image%202026-03-02%20at%2023.59.35.jpeg') no-repeat center center/cover;
+    padding:20px;
 }
 
 .overlay{
     background: rgba(0,0,0,0.6);
-    padding:50px;
-    border-radius:20px;
+    padding:40px 25px;
+    border-radius:25px;
+    width:100%;
+    max-width:420px;
+    animation: fadeIn 2s ease-in-out;
 }
 
 h1{
-    font-size:38px;
+    font-family:'Great Vibes', cursive;
+    font-size:42px;
     margin-bottom:30px;
+    line-height:1.2;
 }
 
 #countdown{
-    font-size:45px;
-    font-weight:bold;
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:20px;
+    margin-bottom:30px;
 }
+
+.time-box{
+    display:flex;
+    flex-direction:column;
+}
+
+.number{
+    font-size:48px;
+    font-weight:600;
+}
+
+.label{
+    font-size:14px;
+    letter-spacing:2px;
+    margin-top:5px;
+}
+
+.music-btn{
+    background: rgba(255,255,255,0.15);
+    border:1px solid rgba(255,255,255,0.4);
+    color:white;
+    padding:12px 20px;
+    border-radius:30px;
+    font-size:14px;
+    letter-spacing:1px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.music-btn:hover{
+    background: rgba(255,255,255,0.3);
+}
+
+@keyframes fadeIn{
+    from {opacity:0; transform:translateY(20px);}
+    to {opacity:1; transform:translateY(0);}
+}
+
+@media (max-width:350px){
+    h1{ font-size:34px; }
+    .number{ font-size:38px; }
+}
+
 </style>
 </head>
 <body>
 
+<audio id="music" loop>
+  <source src="COLE-AQUI-O-LINK-DA-SUA-MUSICA.mp3" type="audio/mpeg">
+</audio>
+
 <div class="overlay">
+
 <h1>A melhor escolha das nossas vidas !</h1>
-<div id="countdown"></div>
+
+<div id="countdown">
+  <div class="time-box">
+    <div class="number" id="days"></div>
+    <div class="label">DIAS</div>
+  </div>
+
+  <div class="time-box">
+    <div class="number" id="hours"></div>
+    <div class="label">HORAS</div>
+  </div>
+
+  <div class="time-box">
+    <div class="number" id="minutes"></div>
+    <div class="label">MINUTOS</div>
+  </div>
+
+  <div class="time-box">
+    <div class="number" id="seconds"></div>
+    <div class="label">SEGUNDOS</div>
+  </div>
+</div>
+
+<button class="music-btn" onclick="toggleMusic()">
+🎵 Tocar música
+</button>
+
 </div>
 
 <script>
+
 const countdownDate = new Date("December 18, 2026 21:00:00").getTime();
 
 const x = setInterval(function() {
@@ -56,16 +146,32 @@ const x = setInterval(function() {
   const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  document.getElementById("countdown").innerHTML =
-  days + " dias " + hours + " horas "
-  + minutes + " minutos " + seconds + " segundos ";
+  document.getElementById("days").innerHTML = days;
+  document.getElementById("hours").innerHTML = hours;
+  document.getElementById("minutes").innerHTML = minutes;
+  document.getElementById("seconds").innerHTML = seconds;
 
   if (distance < 0) {
     clearInterval(x);
-    document.getElementById("countdown").innerHTML =
-    "Chegou o nosso tão sonhado dia !";
+    document.querySelector(".overlay").innerHTML =
+    "<h1>Chegou o nosso tão sonhado dia !</h1>";
   }
+
 }, 1000);
+
+function toggleMusic(){
+  var music = document.getElementById("music");
+  var btn = document.querySelector(".music-btn");
+
+  if(music.paused){
+      music.play();
+      btn.innerHTML = "⏸ Pausar música";
+  } else {
+      music.pause();
+      btn.innerHTML = "🎵 Tocar música";
+  }
+}
+
 </script>
 
 </body>
