@@ -156,6 +156,7 @@ const countdownDate = new Date("December 18, 2026 21:00:00").getTime();
 const music = document.getElementById("music");
 const btn = document.querySelector(".music-btn");
 const cincoHoras = 5 * 60 * 60 * 1000;
+let surpresaMostrada = false;
 
 function animateNumber(id, value){
     const el = document.getElementById(id);
@@ -181,12 +182,15 @@ const x = setInterval(function() {
   const now = new Date().getTime();
   const distance = countdownDate - now;
 
-if(distance <= cincoHoras && distance > 0){
+if(distance <= cincoHoras && distance > 0 && !surpresaMostrada){
     const surpresa = document.getElementById("surpresa");
     surpresa.style.display = "block";
+    
     setTimeout(()=>{
         surpresa.style.opacity = "1";
     },100);
+
+    surpresaMostrada = true;
 }
 
   const days = Math.floor(distance / (1000 * 60 * 60 * 24));
